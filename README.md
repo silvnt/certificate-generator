@@ -1,2 +1,2 @@
 # certificate-generator
-A certificate generator written in nodejs
+A certificate generator written in go
