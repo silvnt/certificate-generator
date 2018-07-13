@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<title>Gerador de Certificados</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+	<div class="jumbotron jumbotron-fluid text-center">
+		<h1>Gerador de Certificados</h1>
+	</div>
+
+	<form action="">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>1. Criar Modelo</h2>
+					<div class="col-sm-4">
+						<input type="file" class="custom-file-input" id="certif-bg" name="filename">
+						<label class="custom-file-label" for="certif-bg">Anexar Imagem de Fundo...</label>
+						<p>Dica:
+							<a href="https://materiais.even3.com.br/templates-de-certificados">Templates de Certificados</a>
+						</p>
+					</div>
+					<div class="col-sm-12 border" id="certif-board">
+
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<h2>2. Importar Participantes</h2>
+					<div class="form-group">
+						<label for="students-list">Copie o conteúdo da planilha excel, incluindo os cabeçalhos e cole aqui</label>
+						<textarea class="form-control" rows="10" id="students-list"></textarea>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<h2>3. Enviar Certificados</h2>
+					<button type="submit" class="btn btn-primary">Enviar por e-mail</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="jumbotron jumbotron-fluid text-center">
+			<p>&copy silvnt</p>
+		</div>
+	</form>
+
+</body>
+
+</html>
