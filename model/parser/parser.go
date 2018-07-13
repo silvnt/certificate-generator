@@ -4,30 +4,24 @@ import (
 	"strings"
 )
 
-// Student is a type of data structure
-type Student struct {
-	Name               string
-	Country            string
-	Institution        string
-	Email              string
-	RegistrationStatus string
-}
-
 // ParseText parse to generate a list of students in a structure list
-func ParseText(txt string) []Student {
-	var list []Student
+func ParseText(txt string) []map[string]string {
 	lines := strings.Split(txt, "\n")
+	headers := strings.Split(lines[0], "	")
+	lines = lines[1:]
+
+	var studentsList []map[string]string
 
 	for i := 0; i < len(lines); i++ {
 		data := strings.Split(lines[i], "	")
-		list = append(list, Student{
-			Name:               data[0],
-			Country:            data[1],
-			Institution:        data[2],
-			Email:              data[3],
-			RegistrationStatus: data[4],
-		})
+		m := make(map[string]string, len(headers))
+
+		for j := 0; j < len(headers); j++ {
+			m[headers[j]] = data[j]
+		}
+
+		studentsList = append(studentsList, m)
 	}
 
-	return list
+	return studentsList
 }
