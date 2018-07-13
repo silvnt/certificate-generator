@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// ParseText parse to generate a list of students in a structure list
+// ParseText parse to generate a list of students in a array of dict
 func ParseText(txt string) []map[string]string {
 	lines := strings.Split(txt, "\n")
 	headers := strings.Split(lines[0], "	")
