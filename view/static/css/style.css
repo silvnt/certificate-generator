@@ -1,0 +1,53 @@
+body{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.jumbotron{
+  padding: 0px 0px 0px 0px;
+  background-color: #007bff;
+  color: white;
+  margin: 0px 0px 0px 0px;
+}
+
+.col-sm-12{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.col-sm-4{
+  margin-left: 20px;
+}
+
+#certif-board{
+  width: 1052px;
+  height: 746px;
+  padding: 0px 0px 0px 0px;
+  box-shadow: 5px 5px 5px;
+}
+
+#certif-bg{
+  position: absolute;
+  z-index: -1;
+  width: 1050px;
+  height: 744px;
+  visibility: hidden;
+}
+
+#textarea p{
+  font-size: 18pt;
+  margin: 0px 0px 0px 0px;
+  word-wrap: break-word;
+  
+}
+
+#textarea{
+  padding: 50px 100px 50px 150px;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+footer{
+  height: 50px;
+}
