@@ -1,118 +1,172 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html>
 
 <head>
-	<title>Gerador de Certificados</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<link rel="stylesheet" href="static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="static/css/style.css">
-	<script src="static/js/jquery.min.js"></script>
-	<script src="static/js/bootstrap.min.js"></script>
-	<script src="static/js/editor.js"></script>
-</head>
+  <title>Certifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body>
-	<header class="jumbotron jumbotron-fluid text-center">
-		<h1>
-			<b>Gerador de Certificados</b>
-		</h1>
-	</header>
+  <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet prefetch" href="static/css/font-awesome.css" type="text/css">
+  <link rel="stylesheet" href="static/css/home.css" type="text/css">
+  <link rel="stylesheet" href="static/css/jqx.base.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/jqx.arctic.css" type="text/css" />
 
-	<div class="container">
-		<div class="col-sm-12 step">
-			<h2>1. Criar Modelo</h2>
-			<div class="row" id="input-image">
-				<div class="col-sm-3">
-					<input type="file" class="custom-file-input" name="filename" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png">
-					<label class="custom-file-label" for="certif-bg">Anexar Imagem de Fundo...</label>
-				</div>
-				<div class="col-sm-3">
-					<button class="btn btn-secondary" onclick="removeimage();">Remover Imagem</button>
-				</div>
-				<div class="col-sm-3">
-					<p>Dica:
-						<a href="https://materiais.even3.com.br/templates-de-certificados">Templates de Certificados</a>
-					</p>
-				</div>
-			</div>
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/home.js"></script>
+  <script type="text/javascript" src="static/js/jqxcore.js"></script>
+  <script type="text/javascript" src="static/js/jqxbuttons.js"></script>
+  <script type="text/javascript" src="static/js/jqxscrollbar.js"></script>
+  <script type="text/javascript" src="static/js/jqxlistbox.js"></script>
+  <script type="text/javascript" src="static/js/jqxdropdownlist.js"></script>
+  <script type="text/javascript" src="static/js/jqxdropdownbutton.js"></script>
+  <script type="text/javascript" src="static/js/jqxcolorpicker.js"></script>
+  <script type="text/javascript" src="static/js/jqxwindow.js"></script>
+  <script type="text/javascript" src="static/js/jqxeditor.js"></script>
+  <script type="text/javascript" src="static/js/jqxtooltip.js"></script>
+  <script type="text/javascript" src="static/js/jqxcheckbox.js"></script>
 
-			<div id="certif-board" class="border">
-				<img id="certif-bg" src="#" />
-				<div class="col-sm-4 form-inline" id="formatting-bar">
-					<button id="bold_btn" class="btn format-btn">
-						<b>B</b>
-					</button>
-					<button id="italic_btn" class="btn format-btn">
-						<i>i</i>
-					</button>
-					<button id="left_btn" class="btn format-btn">
-						<img src="static/icons/align-left.svg" />
-					</button>
-					<button id="center_btn" class="btn format-btn">
-						<img src="static/icons/align-center.svg" />
-					</button>
-					<button id="right_btn" class="btn format-btn">
-						<img src="static/icons/align-right.svg" />
-					</button>
-					<button id="justify_btn" class="btn format-btn">
-						<img src="static/icons/justify-left.svg" />
-					</button>
-					<!--<input class="form-control col-sm-3" type="number" value="18" id="text-size-input">-->
-				</div>
-				<div id="textarea" contenteditable="true">
-					<p>
-						<br>
-					</p>
-					<p>
-						<br>
-					</p>
-					<p>
-						<br>
-					</p>
-					<p style="font-size: 32pt; font-weight: bold; text-align: center">CERTIFICADO</p>
-					<p>
-						<br>
-					</p>
-					<p>
-						<br>
-					</p>
-					<p style="text-align: justify">Certifico que {[Nome]} participou do I Congresso Norte Americano de Letras na cidade de Recife, no período de 10/04/2018
-						a 12/04/2018 totalizando uma carga horária de 20 horas.</p>
-					<p>
-						<br>
-					</p>
-					<p>
-						<br>
-					</p>
-					<p>
-						<br>
-					</p>
-				</div>
+  <body>
+    <header class="text-center">
+      <h1>
+        <i>Certifier</i>
+      </h1>
+      <small>A web application developed in Go to create and send bulk certificates</small>
+    </header>
+    <form method="POST">
+      <section class="col-sm-12">
+        <h2>1. Criar Modelo</h2>
+        <div class="row">
+          <div class="col-sm-3">
+            <label for="input-bg" class="custom-file-label" style="margin-left: 20px">
+              <small>Selecione uma imagem de fundo</small>
+            </label>
+            <input name="input-bg" id="input-bg" type="file" class="custom-file-input" accept="image/gif, image/jpeg, image/png">
+          </div>
+          <div class="col-sm-1">
+            <button id="remove-bg" class="btn">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+          <div>
+            <p>Dica:
+              <a href="https://materiais.even3.com.br/templates-de-certificados">Templates de Certificados</a>
+            </p>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div id="editor-box">
+          <img id="editor-bg" src="#">
+          <div id="editor" contenteditable="true">
+            <div align="center">
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <font face="Arial, Helvetica, sans-serif">
+                  <b>
+                    <font size="6">CERTIFICADO</font>
+                  </b>
+                  <br>
+                </font>
+              </p>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">Certifico que {[Nome]} participou do I Congresso Norte Americano de Letras na cidade de Recife, no período
+                de 10/04/2018 a 12/04/2018 totalizando uma carga horária de 20 horas.</font>
+              <br>
+            </div>
+          </div>
+          <textarea name="input-editor" id="input-editor">
+            <div align="center">
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <br>
+              </p>
+              <p>
+                <font face="Arial, Helvetica, sans-serif">
+                  <b>
+                    <font size="6">CERTIFICADO</font>
+                  </b>
+                  <br>
+                </font>
+              </p>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">
+                <br>
+              </font>
+            </div>
+            <div align="center">
+              <font size="5" face="Arial, Helvetica, sans-serif">Certifico que {[Nome]} participou do I Congresso Norte Americano de Letras na cidade de Recife, no período
+                de 10/04/2018 a 12/04/2018 totalizando uma carga horária de 20 horas.</font>
+              <br>
+            </div>
+          </div>
+          </textarea>
+        </div>
+      </section>
+      <section class="col-sm-12">
+        <h2>2. Importar Participantes</h2>
+        <label for="input-table">Copie o conteúdo da planilha excel, incluindo os cabeçalhos e cole aqui</label>
+        <textarea name="input-table" id="input-table" class="form-control" rows="10"></textarea>
+      </section>
+      <section class="col-sm-12">
+        <h2>3. Enviar Certificados</h2>
+        <button class="btn btn-primary btn-lg" id="submit-content" type="submit">Enviar por e-mail</button>
+      </section>
+    </form>
 
-			</div>
+    <footer class="text-center">
+      © silvnt
+    </footer>
 
-		</div>
 
-		<form method="POST">
-			<div class="col-sm-12 step">
-				<h2>2. Importar Participantes</h2>
-				<div class="form-group">
-					<label for="students-list">Copie o conteúdo da planilha excel, incluindo os cabeçalhos e cole aqui</label>
-					<textarea name="students-data" class="form-control" rows="10" id="students-list"></textarea>
-				</div>
-			</div>
-			<div class="col-sm-12 step">
-				<h2>3. Enviar Certificados</h2>
-				<button type="submit" class="btn btn-primary btn-lg">Enviar por e-mail</button>
-			</div>
-		</form>	
-	</div>
-	<footer class="jumbotron jumbotron-fluid text-center">
-		<p>&copy silvnt</p>
-	</footer>
 
-</body>
+  </body>
 
 </html>
