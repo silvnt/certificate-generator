@@ -16,7 +16,11 @@ func TestParseText(t *testing.T) {
 		"\nEdilson Carneiro	Brasil	FACULDADE DE ARACAJU	produto+edilson@even3." +
 		"com.br	Pendente"
 
-	studentsList := ParseText(textToParse)
+	studentsList, _, err := ParseText(textToParse)
+
+	if err != nil {
+		t.Error(err.Error())
+	}
 
 	if len(studentsList) != 6 {
 		t.Error("list has different size than expected")
@@ -47,4 +51,81 @@ func TestParseText(t *testing.T) {
 			t.Errorf("field Inscrição is null - student nº %d - not expected", i+1)
 		}
 	}
+}
+
+func TestParseTable(t *testing.T) {
+	headers := []string{"Nome", "País", "Instituição", "Email", "Inscrição"}
+	var tableToParse []map[string]string
+
+	line := make(map[string]string, 3)
+	line[headers[0]] = "Dari Araujo"
+	line[headers[1]] = "Brasil"
+	line[headers[2]] = "FUCAPI - FUNDAÇÃO CENTRO DE ANÁLISE, PESQUIS" +
+		"A E INOVAÇÃO TECNOLÓGICA"
+	line[headers[3]] = "produto+dari@even3.com.br"
+	line[headers[4]] = "Pendente"
+	tableToParse = append(tableToParse, line)
+
+	line = make(map[string]string, 3)
+	line[headers[0]] = "David E. Resende Almeida"
+	line[headers[1]] = "Brasil"
+	line[headers[2]] = "CENTRO UNIVERSITÁRIO UNA"
+	line[headers[3]] = "produto+david@even3.com.br"
+	line[headers[4]] = "Pendente"
+	tableToParse = append(tableToParse, line)
+
+	line = make(map[string]string, 3)
+	line[headers[0]] = "Dulcilene Saraiva Reis"
+	line[headers[1]] = "Brasil"
+	line[headers[2]] = ""
+	line[headers[3]] = "produto+dulcilene@even3.com.br"
+	line[headers[4]] = "Pendente"
+	tableToParse = append(tableToParse, line)
+
+	textToParse := "Meu nome é {[Nome]}, moro no {[País]} e minha instituição " +
+		"é {[Instituição]}. Meu endereço de email é {[Email]} e minha inscrição " +
+		"está {[Inscrição]}."
+
+	expectedTexts := []string{
+		"Meu nome é Dari Araujo, moro no Brasil e minha instituição é FUCAPI - F" +
+			"UNDAÇÃO CENTRO DE ANÁLISE, PESQUISA E INOVAÇÃO TECNOLÓGICA. Meu ender" +
+			"eço de email é produto+dari@even3.com.br e minha inscrição está Pende" +
+			"nte.",
+
+		"Meu nome é David E. Resende Almeida, moro no Brasil e minha instituição" +
+			" é CENTRO UNIVERSITÁRIO UNA. Meu endereço de email é produto+david@ev" +
+			"en3.com.br e minha inscrição está Pendente.",
+
+		"Meu nome é Dulcilene Saraiva Reis, moro no Brasil e minha instituição é" +
+			" . Meu endereço de email é produto+dulcilene@even3.com.br e minha ins" +
+			"crição está Pendente.",
+	}
+
+	expectedEmails := []string{
+		"produto+dari@even3.com.br",
+		"produto+david@even3.com.br",
+		"produto+dulcilene@even3.com.br",
+	}
+
+	certificateTexts, err := ParseTable(tableToParse, headers, textToParse)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if len(certificateTexts) != 3 {
+		t.Error("list has different size than expected")
+	}
+
+	//t.Log(certificateTexts)
+
+	for i := 0; i < len(certificateTexts); i++ {
+		if certificateTexts[i]["text"] != expectedTexts[i] {
+			t.Errorf("text not expected - text nº %d", i+1)
+		}
+		if certificateTexts[i]["email"] != expectedEmails[i] {
+			t.Errorf("email not expected - email nº %d", i+1)
+		}
+	}
+
 }

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 
 	"github.com/silvnt/certifier-go/model/parser"
@@ -18,10 +18,20 @@ func main() {
 		}
 
 		certifText := r.FormValue("input-editor")
-		table := parser.ParseText(r.FormValue("input-table"))
+		log.Println(r.FormValue("input-table"))
+		table, headers, err := parser.ParseText(r.FormValue("input-table"))
 
-		fmt.Println(certifText)
-		fmt.Println(table)
+		if err != nil {
+			log.Println(err)
+		} else {
+			parsed, err := parser.ParseTable(table, headers, certifText)
+
+			if err != nil {
+				log.Println(err)
+			}
+
+			_ = parsed
+		}
 
 		home.Execute(w, struct{ Success bool }{true})
 	})
