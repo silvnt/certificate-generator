@@ -51,20 +51,18 @@ func ParseText(txt string) ([]map[string]string, []string, error) {
 
 // ParseTable generates a list of certificate texts & corresponding emails
 func ParseTable(table []map[string]string, headers []string,
-	textContent string) ([]map[string]string, error) {
-	var certifTexts []map[string]string
+	textContent string) ([]string, error) {
+	var certifTexts []string
 
 	for i := 0; i < len(table); i++ {
-		certif := make(map[string]string, 2)
-		certif["text"] = textContent
-		certif["email"] = table[i]["Email"]
+		certif := textContent
 		for j := 0; j < len(headers); j++ {
 			regex := regexp.MustCompile(`\{\[` + headers[j] + `\]\}`)
-			certif["text"] = regex.ReplaceAllString(certif["text"],
+			certif = regex.ReplaceAllString(certif,
 				table[i][headers[j]])
 		}
 
-		if regexp.MustCompile(`\{\[.\]\}`).MatchString(certif["text"]) {
+		if regexp.MustCompile(`\{\[.\]\}`).MatchString(certif) {
 			return nil, errors.New("há tags que não correpondem - verifique os con" +
 				"teúdos")
 		}

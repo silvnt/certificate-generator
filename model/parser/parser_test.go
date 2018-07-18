@@ -101,12 +101,6 @@ func TestParseTable(t *testing.T) {
 			"crição está Pendente.",
 	}
 
-	expectedEmails := []string{
-		"produto+dari@even3.com.br",
-		"produto+david@even3.com.br",
-		"produto+dulcilene@even3.com.br",
-	}
-
 	certificateTexts, err := ParseTable(tableToParse, headers, textToParse)
 
 	if err != nil {
@@ -120,11 +114,8 @@ func TestParseTable(t *testing.T) {
 	//t.Log(certificateTexts)
 
 	for i := 0; i < len(certificateTexts); i++ {
-		if certificateTexts[i]["text"] != expectedTexts[i] {
+		if certificateTexts[i] != expectedTexts[i] {
 			t.Errorf("text not expected - text nº %d", i+1)
-		}
-		if certificateTexts[i]["email"] != expectedEmails[i] {
-			t.Errorf("email not expected - email nº %d", i+1)
 		}
 	}
 
