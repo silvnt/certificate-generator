@@ -1,7 +1,7 @@
 window.onload = function () {
   $(document).ready(function () {
     $('#editor').jqxEditor({
-      tools: 'bold italic underline | format font size color background | left center right | outdent indent | ul ol | clean'
+      tools: 'bold italic underline | font size color background | left center right | ul ol | clean'
     });
   });
 

@@ -34,22 +34,25 @@
       </h1>
       <small>A web application developed in Go to create and send bulk certificates</small>
     </header>
-    <form method="POST">
+    {{if .ThisIs}}
+      <p>{{ .Msg}}</p>
+    {{else}}
+    <form method="post" enctype="multipart/form-data">
       <section class="col-sm-12">
         <h2>1. Criar Modelo</h2>
-        <div class="row">
-          <div class="col-sm-3">
-            <label for="input-bg" class="custom-file-label" style="margin-left: 20px">
+        <div class="row" style="display: inline-block">
+          <div class="col-sm-7" style="display: inline-block">
+            <label for="input-bg" class="custom-file-label text-left">
               <small>Selecione uma imagem de fundo</small>
             </label>
             <input name="input-bg" id="input-bg" type="file" class="custom-file-input" accept="image/gif, image/jpeg, image/png">
           </div>
-          <div class="col-sm-1">
-            <button id="remove-bg" class="btn">
+          <div class="col-sm-1" style="display: inline-block">
+            <button id="remove-bg" class="btn" type="button">
               <i class="fa fa-trash"></i>
             </button>
           </div>
-          <div>
+          <div style="display: inline-block">
             <p>Dica:
               <a href="https://materiais.even3.com.br/templates-de-certificados">Templates de Certificados</a>
             </p>
@@ -57,35 +60,17 @@
         </div>
         <br>
         <br>
-        <div id="editor-box">
-          <img id="editor-bg" src="#">
+        <div id="editor-box" style="display: inline-block">
+          <div style="display: flex;">
+              <img id="editor-bg" src="#">
+          </div>
+          
           <div id="editor" contenteditable="true">
-            <div align="center">
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <font face="Arial, Helvetica, sans-serif">
-                  <b>
-                    <font size="6">CERTIFICADO</font>
-                  </b>
-                  <br>
-                </font>
-              </p>
+            <div>
+              <br>
             </div>
-            <div align="center">
-              <font size="5" face="Arial, Helvetica, sans-serif">
-                <br>
-              </font>
+            <div>
+              <br>
             </div>
             <div align="center">
               <font size="5" face="Arial, Helvetica, sans-serif">
@@ -104,32 +89,11 @@
             </div>
           </div>
           <textarea name="input-editor" id="input-editor">
-            <div align="center">
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <br>
-              </p>
-              <p>
-                <font face="Arial, Helvetica, sans-serif">
-                  <b>
-                    <font size="6">CERTIFICADO</font>
-                  </b>
-                  <br>
-                </font>
-              </p>
+            <div>
+              <br>
             </div>
-            <div align="center">
-              <font size="5" face="Arial, Helvetica, sans-serif">
-                <br>
-              </font>
+            <div>
+              <br>
             </div>
             <div align="center">
               <font size="5" face="Arial, Helvetica, sans-serif">
@@ -146,16 +110,14 @@
                 de 10/04/2018 a 12/04/2018 totalizando uma carga horária de 20 horas.</font>
               <br>
             </div>
-          </div>
           </textarea>
-        </div>
       </section>
       <section class="col-sm-12">
         <h2>2. Importar Participantes</h2>
-        <label for="input-table">Copie o conteúdo da planilha excel, incluindo os cabeçalhos e cole aqui</label>
-        <textarea name="input-table" id="input-table" class="form-control" rows="10"></textarea>
+        <label for="input-table">Copie o conteúdo da planilha excel, incluindo os cabeçalhos e cole aqui</label><br>
+        <textarea name="input-table" id="input-table" class="form-control" rows="10" style="display: inline-block"></textarea>
       </section>
-      <section class="col-sm-12">
+      <section class="col-sm-12" style="display: inline-block">
         <h2>3. Enviar Certificados</h2>
         <button class="btn btn-primary btn-lg" id="submit-content" type="submit">Enviar por e-mail</button>
       </section>
@@ -165,7 +127,7 @@
       © silvnt
     </footer>
 
-
+    {{end}}
 
   </body>
 

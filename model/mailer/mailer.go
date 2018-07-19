@@ -3,7 +3,6 @@ package mailer
 import (
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -17,10 +16,12 @@ type Sender struct {
 	Address            string
 	DefaultSubject     string
 	DefaultTextContent string
+	DefaultFileName    string
 }
 
 // SendEmail sends emails given the remitee's information & filename to be sent
-func (s *Sender) SendEmail(remiteeName, remiteeAddress, filename string) error {
+func (s *Sender) SendEmail(remiteeName string, remiteeAddress string,
+	fileData []byte) error {
 	m := mail.NewV3Mail()
 
 	from := mail.NewEmail(s.Name, s.Address)
@@ -35,21 +36,17 @@ func (s *Sender) SendEmail(remiteeName, remiteeAddress, filename string) error {
 	m.AddPersonalizations(personalization)
 
 	aPDF := mail.NewAttachment()
-	dat, err := ioutil.ReadFile(filename)
-	if err != nil {
-		fmt.Println(err)
-		return err
-	}
-	encoded := base64.StdEncoding.EncodeToString([]byte(dat))
+	encoded := base64.StdEncoding.EncodeToString(fileData)
 	aPDF.SetContent(encoded)
 	aPDF.SetType("application/pdf")
-	aPDF.SetFilename(filename)
+	aPDF.SetFilename(s.DefaultFileName)
 	aPDF.SetDisposition("attachment")
 	aPDF.SetContentID("Test Attachment")
 
 	m.AddAttachment(aPDF)
 
-	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"), "/v3/mail/send", "https://api.sendgrid.com")
+	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"),
+		"/v3/mail/send", "https://api.sendgrid.com")
 	request.Method = "POST"
 	request.Body = mail.GetRequestBody(m)
 	response, err := sendgrid.API(request)

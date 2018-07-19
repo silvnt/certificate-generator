@@ -7,20 +7,20 @@ import (
 
 func TestGenerate(t *testing.T) {
 	content := []string{
-		"<div align='center'><p><br></p><p><br></p><p><br></p><p><br></p><p><fon" +
-			"t face='Arial, Helvetica, sans-serif'><b><font size='6'>CERTIFICADO</" +
-			"font></b><br></font></p></div><div align='center'><font size='5' face" +
-			"='Arial, Helvetica, sans-serif'><br></font></div><div align='center'>" +
-			"<font size='5' face='Arial, Helvetica, sans-serif'><br></font></div><" +
-			"div align='center'><font size='5' face='Arial, Helvetica, sans-serif'" +
-			"><br></font></div><div align='center'><font size='5' face='Arial, Hel" +
-			"vetica, sans-serif'>Certifico que Fulano participou do I Congresso No" +
-			"rte Americano de Letras na cidade de Recife, no período de 10/04/2018" +
-			" a 12/04/2018 totalizando uma carga horária de 20 horas.</font><br></" +
-			"div>",
+		"<div align='center'><font face='Arial, Helvetica, sans-serif'><b><font " +
+			"size='6'><br></font></b></font></div><div align='center'><font face='" +
+			"Arial, Helvetica, sans-serif'><b><font size='6'>CERTIFICADO</font></b" +
+			"><br></font></p></div><div align='center'><font size='5' face='Arial," +
+			" Helvetica, sans-serif'><br></font></div><div align='center'><font si" +
+			"ze='5' face='Arial, Helvetica, sans-serif'><br></font></div><div alig" +
+			"n='center'><font size='5' face='Arial, Helvetica, sans-serif'>Certifi" +
+			"co que Fulano participou do I Congresso Norte Americano de Letras na " +
+			"cidade de Recife, no período de 10/04/2018 a 12/04/2018 totalizando u" +
+			"ma carga horária de 20 horas.</font><br></div></div>",
 	}
 
-	pdfbytes, err := Generate(content)
+	var str string
+	pdfbytes, err := Generate(content, false, str)
 
 	if err != nil {
 		t.Error(err)

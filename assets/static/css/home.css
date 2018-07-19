@@ -12,7 +12,7 @@ header, footer{
 section{ 
   margin-bottom: 10px;
   margin-top: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 footer{
@@ -24,8 +24,8 @@ a:hover{
 }
 
 #editor-box{
-  width: 877px;
-  height: 620px;
+  width: 730px;
+  height: 515px;
   padding: 0px 0px 0px 0px;
   box-shadow: 5px 5px 5px gray;
   border: 1px solid #888;
@@ -34,26 +34,16 @@ a:hover{
 
 #editor{
   padding: 75px 75px 75px 75px;
-  height: 468px;
+  height: 363px;
   overflow: auto;
   resize: none;
   border: none;
 }
 
-#editor p{
-  margin: 0px;
-}
-
-#editor blockquote{
-  margin: 0 0 0 40px;
-  border: none;
-  padding: 0px;
-}
-
 #editor-bg{
   position: absolute;
-  width: 877px;
-  height: 620px;
+  width: 730px;
+  height: 515px;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   z-index: -1;
@@ -62,4 +52,8 @@ a:hover{
 
 #input-editor{
   visibility: hidden;
+}
+
+#input-table{
+  width: 730px;
 }

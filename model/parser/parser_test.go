@@ -111,8 +111,6 @@ func TestParseTable(t *testing.T) {
 		t.Error("list has different size than expected")
 	}
 
-	//t.Log(certificateTexts)
-
 	for i := 0; i < len(certificateTexts); i++ {
 		if certificateTexts[i] != expectedTexts[i] {
 			t.Errorf("text not expected - text nº %d", i+1)

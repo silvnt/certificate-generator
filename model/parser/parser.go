@@ -2,7 +2,6 @@ package parser
 
 import (
 	"errors"
-	"log"
 	"regexp"
 	"strconv"
 	"strings"
@@ -10,19 +9,28 @@ import (
 
 // ParseText parse to generate a list of students in a array of dict
 func ParseText(txt string) ([]map[string]string, []string, error) {
-	lines := strings.Split(txt, "\n")
-	headers := strings.Split(lines[0], "	")
+	lines := strings.Split(txt, "\r\n")
+	headers := strings.Split(lines[0], "\t")
 	lines = lines[1:]
 
 	var h int
 	for h = 0; h < len(headers); h++ {
-		if headers[h] == "Email" {
+		if strings.Compare(headers[h], "Nome") == 0 {
+			break
+		}
+	}
+	if h == len(headers)-1 {
+		return nil, nil, errors.New("requeried field: Nome")
+	}
+
+	/*for h = 0; h < len(headers); h++ {
+		if strings.Compare(headers[h], "Email") == 0 {
 			break
 		}
 	}
 	if h == len(headers)-1 {
 		return nil, nil, errors.New("requeried field: Email")
-	}
+	}*/
 
 	var studentsList []map[string]string
 
@@ -63,11 +71,9 @@ func ParseTable(table []map[string]string, headers []string,
 		}
 
 		if regexp.MustCompile(`\{\[.\]\}`).MatchString(certif) {
-			return nil, errors.New("há tags que não correpondem - verifique os con" +
+			return nil, errors.New("Há tags que não correpondem - Verifique os con" +
 				"teúdos")
 		}
-
-		log.Println(certif)
 
 		certifTexts = append(certifTexts, certif)
 	}
