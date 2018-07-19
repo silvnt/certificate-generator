@@ -35,15 +35,17 @@ func (s *Sender) SendEmail(remiteeName string, remiteeAddress string,
 	personalization.Subject = s.DefaultSubject
 	m.AddPersonalizations(personalization)
 
-	aPDF := mail.NewAttachment()
-	encoded := base64.StdEncoding.EncodeToString(fileData)
-	aPDF.SetContent(encoded)
-	aPDF.SetType("application/pdf")
-	aPDF.SetFilename(s.DefaultFileName)
-	aPDF.SetDisposition("attachment")
-	aPDF.SetContentID("Test Attachment")
+	if fileData != nil {
+		aPDF := mail.NewAttachment()
+		encoded := base64.StdEncoding.EncodeToString(fileData)
+		aPDF.SetContent(encoded)
+		aPDF.SetType("application/pdf")
+		aPDF.SetFilename(s.DefaultFileName)
+		aPDF.SetDisposition("attachment")
+		aPDF.SetContentID("Test Attachment")
 
-	m.AddAttachment(aPDF)
+		m.AddAttachment(aPDF)
+	}
 
 	request := sendgrid.GetRequest(os.Getenv("SENDGRID_API_KEY"),
 		"/v3/mail/send", "https://api.sendgrid.com")
