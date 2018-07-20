@@ -33,24 +33,30 @@ func HandleHome(homeTemplateName string) {
 
 		bgExt, bgStatus, err := GetBackground(r, "bg", "assets/static/")
 		if err != nil {
-			Redirect(w, home, err.Error()+". Retorne a página anterior.")
+			Redirect(w, home, "Aconteceu um erro inesperado. Retorne a página anter"+
+				"ior e tente novamente.")
+			return
 		} else if bgStatus == true {
-			defer os.Remove("assets/static/bg" + bgExt)
+			defer os.Remove("assets/static/bg" + "." + bgExt)
 		}
 
 		table, tableHeaders, err := GetPeopleData(r)
 		if err != nil {
 			Redirect(w, home, err.Error()+". Retorne a página anterior.")
+			return
 		}
 
 		certificateTexts, err := GetCertificateTexts(r, table, tableHeaders)
 		if err != nil {
 			Redirect(w, home, err.Error()+". Retorne a página anterior.")
+			return
 		}
 
 		pdfBytes, err := GetPDFs(r, certificateTexts, "static/bg."+bgExt, bgStatus)
 		if err != nil {
-			Redirect(w, home, err.Error()+". Retorne a página anterior.")
+			Redirect(w, home, "Aconteceu um erro inesperado. Retorne a página anter"+
+				"ior e tente novamente.")
+			return
 		}
 
 		err = SendEmails(table, "Prof. Dedeco", "dedeco@even3.com.br",
@@ -58,10 +64,13 @@ func HandleHome(homeTemplateName string) {
 				" em anexo.<br><br>(Gerado por Certifier)", "certificado.pdf",
 			pdfBytes)
 		if err != nil {
-			Redirect(w, home, err.Error()+". Retorne a página anterior.")
+			Redirect(w, home, "Aconteceu um erro inesperado. Retorne a página anter"+
+				"ior e tente novamente.")
+			return
 		}
 
 		Redirect(w, home, "Certificados enviados com sucesso! Retorne a página an"+
 			"terior.")
+		return
 	})
 }

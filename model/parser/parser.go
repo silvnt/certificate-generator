@@ -15,34 +15,38 @@ func ParseText(txt string) ([]map[string]string, []string, error) {
 
 	var h int
 	for h = 0; h < len(headers); h++ {
-		if strings.Compare(headers[h], "Nome") == 0 {
+		if headers[h] == "Nome" {
 			break
 		}
 	}
-	if h == len(headers)-1 {
-		return nil, nil, errors.New("requeried field: Nome")
+	if h == len(headers) {
+		return nil, nil, errors.New("Campo Requerido: Nome")
 	}
 
-	/*for h = 0; h < len(headers); h++ {
-		if strings.Compare(headers[h], "Email") == 0 {
+	for h = 0; h < len(headers); h++ {
+		if headers[h] == "Email" {
 			break
 		}
 	}
-	if h == len(headers)-1 {
-		return nil, nil, errors.New("requeried field: Email")
-	}*/
+	if h == len(headers) {
+		return nil, nil, errors.New("Campo Requerido: Email")
+	}
 
 	var studentsList []map[string]string
 
 	for i := 0; i < len(lines); i++ {
 		data := strings.Split(lines[i], "	")
+
 		if len(data) != len(headers) {
 			if data[0] == "" || data[0] == "\n" || data[0] == "\r" {
 				continue
 			} else {
-				return nil, nil, errors.New("linha mal preenchida - linha nº " +
+				return nil, nil, errors.New("Linha mal preenchida - Linha nº " +
 					strconv.Itoa(i+2))
 			}
+		} else if data[len(data)-1] == "" {
+			return nil, nil, errors.New("Linha mal preenchida - Linha nº " +
+				strconv.Itoa(i+2))
 		}
 
 		m := make(map[string]string, len(headers))
@@ -70,9 +74,8 @@ func ParseTable(table []map[string]string, headers []string,
 				table[i][headers[j]])
 		}
 
-		if regexp.MustCompile(`\{\[.\]\}`).MatchString(certif) {
-			return nil, errors.New("Há tags que não correpondem - Verifique os con" +
-				"teúdos")
+		if regexp.MustCompile(`\{\[.+\]\}`).MatchString(certif) {
+			return nil, errors.New("Há tag que não correponde")
 		}
 
 		certifTexts = append(certifTexts, certif)
