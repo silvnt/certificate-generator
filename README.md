@@ -66,6 +66,6 @@ go run certifier.go
 
 ## Acknowledgments
 
-* **João Alexandre** (github.com/joaoaneto) for tips of standardization and organization of web projects
-* **Dayvid Clementino** (github.com/dayvidcds) for tips in front-end development
+* **João Alexandre** (https://github.com/joaoaneto) for tips of standardization and organization of web projects
+* **Dayvid Clementino** (https://github.com/dayvidcds) for tips in front-end development
 * **Even3** for the opportunity to meet this challenge!
