@@ -59,6 +59,7 @@ go run certifier.go
 ```
 ## Documentation
 
+See the documentation at this [link](https://godoc.org/github.com/silvnt/certifier-go)
 
 ## Authors
 
