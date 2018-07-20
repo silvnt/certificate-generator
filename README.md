@@ -10,6 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Go 1.10.3 or later (https://golang.org/dl/);
 * wkhtmltopdf 0.12.5 or later (https://wkhtmltopdf.org/downloads.html);
+* Git 2.18.0 or later (https://git-scm.com/downloads);
 * Go libraries
 
 **Note:** Verify that your GOPATH is set and that the wkhtmltopdf installation was successful through the following commands:
@@ -17,6 +18,8 @@ These instructions will get you a copy of the project up and running on your loc
 go env
 wkhtmltopdf -V
 ```
+**Note:** On Windows, you will need to set the wkhtmltopdf PATH. To learn how to set, go to this [link](https://www.computerhope.com/issues/ch000549.htm).
+
 
 After installing the previous ones, obtain the following libraries:
 
@@ -36,13 +39,21 @@ go get -u github.com/silvnt/certifier-go
 
 ## Running
 
-Before executing, open the command line in project folder ($GOPATH/src/github.com/silvnt/certifier-go), enter the values of SENDGRID_API_KEY and ALTER_SERVER_ADDRESS (if the latter is empty, the default is 'localhost:3000') in local.env, and run the following command:
+### Linux
+Before executing, open the command line in project folder ($GOPATH/src/github.com/silvnt/certifier-go), enter the values of SENDGRID_API_KEY and SERVER_ADDRESS (if the latter is empty, the default is 'localhost:3000') in local.env, and run the following command:
 ```
 source local.env
 ```
 **Note:** You don't have to run this command again until you open a new terminal instance.
 
 Now, start the service:
+```
+go run certifier.go
+```
+### Windows
+On Windows, you will need to set environment variables manually (SENDGRID_API_KEY and SERVER_ADDRESS). To learn how to set environment variables in Windows, go to this [link](https://www.computerhope.com/issues/ch000549.htm).
+
+After this, start the service:
 ```
 go run certifier.go
 ```
