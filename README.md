@@ -23,11 +23,11 @@ wkhtmltopdf -V
 
 After installing the previous ones, obtain the following libraries:
 
-* [go-wkhtmltopdf](github.com/SebastiaanKlippert/go-wkhtmltopdf): Golang commandline wrapper for wkhtmltopdf
+* [go-wkhtmltopdf](https://github.com/SebastiaanKlippert/go-wkhtmltopdf): Golang commandline wrapper for wkhtmltopdf
 ```
 go get -u github.com/SebastiaanKlippert/go-wkhtmltopdf
 ```
-* [sendgrid-go](github.com/sendgrid/sendgrid-go): The Official SendGrid Led, Community Driven Golang API Library
+* [sendgrid-go](https://github.com/sendgrid/sendgrid-go): The Official SendGrid Led, Community Driven Golang API Library
 ```
 go get -u github.com/sendgrid/sendgrid-go
 ```
@@ -57,6 +57,8 @@ After this, start the service:
 ```
 go run certifier.go
 ```
+## Documentation
+
 
 ## Authors
 
